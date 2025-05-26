@@ -15,6 +15,14 @@ const llm = new ChatOpenAI({
     modelName: "gpt-4",
     temperature: 0,
     openAIApiKey: process.env.OPENAI_API_KEY,
+    // streaming: true,
+    // callbacks: [
+    //     {
+    //       handleLLMNewToken(token) {
+    //         process.stdout.write(token);
+    //       },
+    //     },
+    //   ],
 });
 
 const tools = [stockPriceTool, weatherTool, calculatorTool];
