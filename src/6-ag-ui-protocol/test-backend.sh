@@ -18,7 +18,7 @@ curl -X POST http://localhost:8000/awp \
       {
         \"id\": \"$MESSAGE_ID\",
         \"role\": \"user\",
-        \"content\": \"what did i asked you before?\"
+        \"content\": \"What is the Tesla stock price?\"
       }
     ],
     \"tools\": [],
