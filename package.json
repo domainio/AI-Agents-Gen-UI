@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "frontend:dev": "cd src/6-ag-ui-protocol/frontend && npm run dev",
+    "frontend:setup": "cd src/6-ag-ui-protocol/frontend && npm install"
   },
   "dependencies": {
     "@ag-ui/core": "^0.0.28",
@@ -14,11 +16,14 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "langchain": "^0.3.27",
-    "openai": "^4.103.0"
+    "openai": "^4.103.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.2",
     "@types/node": "^22.15.21",
+    "@types/uuid": "^9.0.7",
     "chalk": "^5.4.1",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"

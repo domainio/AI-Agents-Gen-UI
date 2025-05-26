@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express"
+import cors from "cors"
 import {
   RunAgentInputSchema,
   RunAgentInput,
@@ -7,9 +8,14 @@ import {
 } from "@ag-ui/core"
 import { EventEncoder } from "@ag-ui/encoder"
 import { v4 as uuidv4 } from "uuid"
-import { getOrCreateAgentExecutor } from "./agent"
+import { getOrCreateAgentExecutor } from "./agent.js"
 
 const app = express()
+
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}))
 
 app.use(express.json())
 

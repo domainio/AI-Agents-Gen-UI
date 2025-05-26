@@ -2,10 +2,10 @@ import { ChatOpenAI } from "@langchain/openai"
 import { AgentExecutor, createReactAgent } from "langchain/agents"
 import { BufferMemory } from "langchain/memory"
 import dotenv from "dotenv"
-import { weatherTool } from "../tools/get-weather"
-import { stockPriceTool } from "../tools/get-stock-price"
-import calculatorTool from "../tools/calculator"
-import agentPrompt from "../prompts/agent-prompt"
+import { weatherTool } from "../../tools/get-weather.js"
+import { stockPriceTool } from "../../tools/get-stock-price.js"
+import calculatorTool from "../../tools/calculator.js"
+import agentPrompt from "../../prompts/agent-prompt.js"
 
 dotenv.config()
 
