@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import OpenAI from "openai";
+import chalk from "chalk";
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ const response1 = await client.chat.completions.create({
     ]
 });
 
-console.log("Response 1: ", response1.choices[0].message.content); 
+console.log("Response 1: ", chalk.green(response1.choices[0].message.content)); 
 
 const response2 = await client.chat.completions.create({
     model: "gpt-4.1",
@@ -27,4 +28,4 @@ const response2 = await client.chat.completions.create({
     ]
 });
 
-console.log("Response 2: ", response2.choices[0].message.content); 
+console.log("Response 2: ", chalk.red(response2.choices[0].message.content)); 

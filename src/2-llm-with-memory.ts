@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import OpenAI from "openai";
-import * as readline from "readline";
-
+import { createInterface } from "readline/promises";
+import chalk from "chalk";
 dotenv.config();
 
 const client: OpenAI = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -14,27 +14,16 @@ interface ChatMessage {
 const messages: ChatMessage[] = [];
 
 // Create readline interface for user input
-const rl = readline.createInterface({
+const rl = createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-function getUserInput(prompt: string): Promise<string> {
-    return new Promise((resolve) => {
-        rl.question(prompt, (answer) => {
-            resolve(answer);
-        });
-    });
-}
-
-// Simple while loop like the Python version
 while (true) {
-    const userInput = await getUserInput("You: ");
+    const userInput = await rl.question("You: ");
     
-    if (userInput.toLowerCase() === "exit" || 
-        userInput.toLowerCase() === "quit" || 
-        userInput.toLowerCase() === "bye") {
-        console.log("Assistant: Goodbye!");
+    if (userInput.toLowerCase() === "exit") {
+        console.log(chalk.yellow("Assistant: Goodbye!"));
         break;
     }
     
@@ -47,7 +36,7 @@ while (true) {
     
     const assistantResponse = completion.choices[0].message.content || "";
     messages.push({ role: "assistant", content: assistantResponse });
-    console.log(`Assistant: ${assistantResponse}`);
+    console.log(chalk.yellow(`Assistant: ${assistantResponse}`));
 }
 
 console.log(`\nConversation ended. Total messages: ${messages.length}`);
