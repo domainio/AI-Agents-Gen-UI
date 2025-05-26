@@ -6,13 +6,18 @@
     "build": "tsc"
   },
   "dependencies": {
+    "@ag-ui/core": "^0.0.28",
+    "@ag-ui/encoder": "^0.0.28",
     "@langchain/community": "^0.3.44",
     "@langchain/openai": "^0.5.11",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
+    "express": "^5.1.0",
     "langchain": "^0.3.27",
     "openai": "^4.103.0"
   },
   "devDependencies": {
+    "@types/express": "^5.0.2",
     "@types/node": "^22.15.21",
     "chalk": "^5.4.1",
     "tsx": "^4.19.4",
