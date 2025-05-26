@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import { ChatOpenAI } from "@langchain/openai";
 import { AgentExecutor, createReactAgent } from "langchain/agents";
+import { BufferMemory } from "langchain/memory";
 import chalk from "chalk";
 import { weatherTool } from "./tools/get-weather";
 import { stockPriceTool } from "./tools/get-stock-price";
@@ -18,6 +19,12 @@ const llm = new ChatOpenAI({
 
 const tools = [stockPriceTool, weatherTool, calculatorTool];
 
+const memory = new BufferMemory({
+    memoryKey: "chat_history",
+    returnMessages: false,
+    outputKey: "output",
+});
+
 const agent = await createReactAgent({
     llm,
     tools,
@@ -27,6 +34,7 @@ const agent = await createReactAgent({
 const agentExecutor = new AgentExecutor({
     agent,
     tools,
+    memory,
     verbose: false,
 });
 
@@ -46,3 +54,7 @@ while (true) {
 }
 
 rl.close();
+
+console.log(chalk.blue("\nChat history:"));
+const memoryVars = await memory.loadMemoryVariables({});
+console.log(memoryVars.chat_history);

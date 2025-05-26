@@ -1,10 +1,14 @@
 import { PromptTemplate } from "@langchain/core/prompts";
 
 const agentPrompt = new PromptTemplate({
-    inputVariables: ["input", "agent_scratchpad", "tools", "tool_names"],
+    inputVariables: ["input", "agent_scratchpad", "tools", "tool_names", "chat_history"],
     template: `
-Answer the following questions as best you can. You have access to the following tools:
+You are a helpful assistant with access to tools. You can remember our previous conversation.
 
+Previous conversation:
+{chat_history}
+
+You have access to the following tools:
 {tools}
 
 Use the following format:
