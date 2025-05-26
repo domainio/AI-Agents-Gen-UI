@@ -23,7 +23,9 @@ const agent = await createReactAgent({
   prompt: agentPrompt
 })
 
+// Cache both memories and agent executors per thread
 const threadMemories = new Map<string, BufferMemory>()
+const threadAgentExecutors = new Map<string, AgentExecutor>()
 
 const getOrCreateMemory = (threadId: string): BufferMemory => {
   if (!threadMemories.has(threadId)) {
@@ -36,15 +38,25 @@ const getOrCreateMemory = (threadId: string): BufferMemory => {
   return threadMemories.get(threadId)!
 }
 
-export const createAgentExecutor = (threadId: string): AgentExecutor => {
+export const getOrCreateAgentExecutor = (threadId: string): AgentExecutor => {
+  // Return cached executor if it exists
+  if (threadAgentExecutors.has(threadId)) {
+    return threadAgentExecutors.get(threadId)!
+  }
+
+  // Create new executor with memory for this thread
   const memory = getOrCreateMemory(threadId)
-  
-  return new AgentExecutor({
+  const agentExecutor = new AgentExecutor({
     agent,
     tools,
     memory,
     verbose: false,
   })
+
+  // Cache it for future requests
+  threadAgentExecutors.set(threadId, agentExecutor)
+
+  return agentExecutor
 }
 
 export { tools }

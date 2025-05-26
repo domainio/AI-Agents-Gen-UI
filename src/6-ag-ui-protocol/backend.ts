@@ -7,7 +7,7 @@ import {
 } from "@ag-ui/core"
 import { EventEncoder } from "@ag-ui/encoder"
 import { v4 as uuidv4 } from "uuid"
-import { createAgentExecutor } from "./agent"
+import { getOrCreateAgentExecutor } from "./agent"
 
 const app = express()
 
@@ -15,6 +15,8 @@ app.use(express.json())
 
 app.post("/awp", async (req: Request, res: Response) => {
   try {
+    console.log("req.body", req.body);
+    
     // Parse and validate the request body
     const input: RunAgentInput = RunAgentInputSchema.parse(req.body)
 
@@ -35,17 +37,10 @@ app.post("/awp", async (req: Request, res: Response) => {
     res.write(encoder.encode(runStarted))
 
     // Create agent executor with memory for this thread
-    const agentExecutor = createAgentExecutor(input.threadId)
+    const agentExecutor = getOrCreateAgentExecutor(input.threadId)
 
-    // Get the last user message
-    const userMessages = input.messages.filter((msg: Message) => msg.role === "user")
-    const lastUserMessage = userMessages[userMessages.length - 1]
+    const lastUserMessage = input.messages.findLast((msg: Message) => msg.role === "user")
     
-    if (!lastUserMessage?.content) {
-      throw new Error("No user message found")
-    }
-
-    // Generate a message ID for the assistant's response
     const messageId = uuidv4()
 
     // Send text message start event
@@ -58,7 +53,7 @@ app.post("/awp", async (req: Request, res: Response) => {
 
     try {
       // Execute the agent
-      const result = await agentExecutor.invoke({ input: lastUserMessage.content })
+      const result = await agentExecutor.invoke({ input: lastUserMessage?.content })
       
       // Send the complete response as content
       const textMessageContent = {
