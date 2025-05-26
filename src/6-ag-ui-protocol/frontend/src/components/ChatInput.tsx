@@ -1,5 +1,5 @@
 import React, { useState, useCallback, KeyboardEvent } from 'react'
-import './ChatInput.css'
+import '../styles/ChatInput.css'
 
 interface ChatInputProps {
   onSendMessage: (content: string) => void

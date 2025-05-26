@@ -2,7 +2,7 @@ import React from 'react'
 import type { ChatMessage } from '../types'
 import Message from './Message'
 import TypingIndicator from './TypingIndicator'
-import './MessageList.css'
+import '../styles/MessageList.css'
 
 interface MessageListProps {
   messages: ChatMessage[]

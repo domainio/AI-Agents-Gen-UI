@@ -4,7 +4,7 @@ import type { ChatMessage, AgentEvent, Message, RunAgentInput } from '../types'
 import ChatHeader from './ChatHeader'
 import MessageList from './MessageList'
 import ChatInput from './ChatInput'
-import './ChatApp.css'
+import '../styles/ChatApp.css'
 
 const ChatApp: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([])

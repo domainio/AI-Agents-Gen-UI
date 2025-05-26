@@ -1,6 +1,6 @@
 import React from 'react'
 import type { ChatMessage } from '../types'
-import './Message.css'
+import '../styles/Message.css'
 
 interface MessageProps {
   message: ChatMessage
