@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "agui:backend": "node dist/6-ag-ui-protocol/backend/backend.js",
+    "agui:backend": "npx tsx src/6-ag-ui-protocol/backend/backend.ts",
     "agui:frontend": "cd src/6-ag-ui-protocol/frontend && npm run dev"
   },
   "dependencies": {
