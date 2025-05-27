@@ -3,14 +3,11 @@ import cors from "cors"
 import {
   RunAgentInputSchema,
   RunAgentInput,
-  EventType,
-  Message,
 } from "@ag-ui/core"
-import { EventEncoder } from "@ag-ui/encoder"
-import { v4 as uuidv4 } from "uuid"
-import { getOrCreateAgentExecutor } from "./agent.js"
+import { AGUIService } from "./agui-service.js"
 
 const app = express()
+const aguiService = new AGUIService()
 
 app.use(cors({
   origin: "http://localhost:3001",
@@ -31,72 +28,8 @@ app.post("/awp", async (req: Request, res: Response) => {
     res.setHeader("Cache-Control", "no-cache")
     res.setHeader("Connection", "keep-alive")
 
-    // Create an event encoder
-    const encoder = new EventEncoder()
+    await aguiService.processAgentRequest(input, res)
 
-    // Send run started event
-    const runStarted = {
-      type: EventType.RUN_STARTED,
-      threadId: input.threadId,
-      runId: input.runId,
-    }
-    res.write(encoder.encode(runStarted))
-
-    // Create agent executor with memory for this thread
-    const agentExecutor = getOrCreateAgentExecutor(input.threadId)
-
-    const lastUserMessage = input.messages.findLast((msg: Message) => msg.role === "user")
-    
-    const messageId = uuidv4()
-
-    // Send text message start event
-    const textMessageStart = {
-      type: EventType.TEXT_MESSAGE_START,
-      messageId,
-      role: "assistant",
-    }
-    res.write(encoder.encode(textMessageStart))
-
-    try {
-      // Execute the agent
-      const result = await agentExecutor.invoke({ input: lastUserMessage?.content })
-      
-      // Send the complete response as content
-      const textMessageContent = {
-        type: EventType.TEXT_MESSAGE_CONTENT,
-        messageId,
-        delta: result.output,
-      }
-      res.write(encoder.encode(textMessageContent))
-
-    } catch (error) {
-      // Send error as content
-      const errorMessage = `Error: ${(error as Error).message}`
-      const textMessageContent = {
-        type: EventType.TEXT_MESSAGE_CONTENT,
-        messageId,
-        delta: errorMessage,
-      }
-      res.write(encoder.encode(textMessageContent))
-    }
-
-    // Send text message end event
-    const textMessageEnd = {
-      type: EventType.TEXT_MESSAGE_END,
-      messageId,
-    }
-    res.write(encoder.encode(textMessageEnd))
-
-    // Send run finished event
-    const runFinished = {
-      type: EventType.RUN_FINISHED,
-      threadId: input.threadId,
-      runId: input.runId,
-    }
-    res.write(encoder.encode(runFinished))
-
-    // End the response
-    res.end()
   } catch (error) {
     res.status(422).json({ error: (error as Error).message })
   }
