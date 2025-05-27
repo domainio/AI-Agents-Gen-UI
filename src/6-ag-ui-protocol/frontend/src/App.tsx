@@ -1,14 +1,11 @@
 import React from 'react'
-import { AGUIRuntime } from './components/AGUIRuntime'
-import { SimpleChat } from './components/SimpleChat'
+import { Chat } from './components/Chat'
 import './styles/App.css'
 
 const App: React.FC = () => {
   return (
     <div className="app">
-      <AGUIRuntime runtimeUrl="http://localhost:8000/awp">
-        <SimpleChat />
-      </AGUIRuntime>
+      <Chat />
     </div>
   )
 }

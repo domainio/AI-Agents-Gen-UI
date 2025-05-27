@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { useAGUI } from './AGUIRuntime'
+import { useAGUI } from '../hooks/useAGUI'
+import { LoadingIndicator } from './LoadingIndicator'
+import { WelcomeMessage } from './WelcomeMessage'
 
-export const SimpleChat: React.FC = () => {
+export const Chat: React.FC = () => {
   const { messages, isLoading, sendMessage } = useAGUI()
   const [input, setInput] = useState('')
 
@@ -21,17 +23,7 @@ export const SimpleChat: React.FC = () => {
       </div>
       
       <div className="chat-messages">
-        {messages.length === 0 && (
-          <div className="welcome-message">
-            <p>Hello! I'm your AI assistant. I can help you with:</p>
-            <ul>
-              <li>🧮 Calculations (try: "What is 25 * 8 + 15?")</li>
-              <li>🌤️ Weather information (try: "What's the weather in London?")</li>
-              <li>📈 Stock prices (try: "What's the Tesla stock price?")</li>
-              <li>❓ General questions</li>
-            </ul>
-          </div>
-        )}
+        {messages.length === 0 && <WelcomeMessage />}
         
         {messages.map((message) => (
           <div key={message.id} className={`message ${message.role}`}>
@@ -47,18 +39,7 @@ export const SimpleChat: React.FC = () => {
           </div>
         ))}
         
-        {isLoading && (
-          <div className="message assistant">
-            <div className="message-avatar">🤖</div>
-            <div className="message-content">
-              <div className="typing-indicator">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-          </div>
-        )}
+        {isLoading && <LoadingIndicator />}
       </div>
       
       <form onSubmit={handleSubmit} className="chat-input-form">
