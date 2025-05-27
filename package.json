@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "frontend:dev": "cd src/6-ag-ui-protocol/frontend && npm run dev",
-    "frontend:setup": "cd src/6-ag-ui-protocol/frontend && npm install"
+    "dev:agui:backend": "node dist/6-ag-ui-protocol/backend/backend.js",
+    "dev:agui:frontend": "cd src/6-ag-ui-protocol/frontend && npm run dev"
   },
   "dependencies": {
     "@ag-ui/core": "^0.0.28",

@@ -2,7 +2,7 @@
   "name": "ag-ui-frontend",
   "version": "1.0.0",
   "scripts": {
-    "dev": "vite --port 3000",
+    "dev": "vite --port 3001",
     "build": "vite build",
     "preview": "vite preview"
   },

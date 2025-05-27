@@ -1,34 +1,7 @@
-# AG-UI Protocol Meetup
+# AI Agents Gen UI with AG-UI Protocol
 
-This project demonstrates the AG-UI protocol with a React frontend and Express backend, showcasing a LangChain React Agent with tools integration.
+This project demonstrates the AG-UI protocol showcasing a LangChain React Agent with tools integration.
 
-## Project Structure
-
-```
-ag-ui/
-├── src/
-│   ├── 6-ag-ui-protocol/         # AG-UI protocol implementation
-│   │   ├── frontend/             # React frontend
-│   │   │   ├── src/
-│   │   │   │   ├── components/   # React components
-│   │   │   │   ├── types/        # TypeScript interfaces
-│   │   │   │   ├── main.tsx      # React entry point
-│   │   │   │   └── App.tsx       # Root component
-│   │   │   ├── index.html        # HTML template
-│   │   │   ├── package.json      # Frontend dependencies
-│   │   │   ├── vite.config.ts    # Vite configuration
-│   │   │   └── tsconfig.json     # Frontend TypeScript config
-│   │   └── backend/              # Express backend
-│   │       ├── backend.ts        # Express server with SSE
-│   │       ├── agent.ts          # LangChain React Agent
-│   │       └── test-backend.sh   # Backend test script
-│   ├── tools/                    # Agent tools
-│   ├── prompts/                  # Agent prompts
-│   └── ...                       # Other examples
-├── dist/                         # Compiled backend code
-├── package.json                  # Backend dependencies & scripts
-└── tsconfig.json                 # Backend TypeScript config
-```
 
 ## Architecture
 

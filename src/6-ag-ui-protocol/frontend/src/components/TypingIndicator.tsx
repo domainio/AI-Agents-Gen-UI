@@ -3,11 +3,11 @@ import '../styles/TypingIndicator.css'
 
 const TypingIndicator: React.FC = () => {
   return (
-    <div className="typing-indicator">
+        <div className="typing-indicator">
       <div className="typing-dots">
-        <span></span>
-        <span></span>
-        <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
       </div>
     </div>
   )
