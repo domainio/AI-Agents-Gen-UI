@@ -12,20 +12,20 @@ export class AGUIService {
     const messageId = uuidv4()
     
     try {
-      // Start protocol flow
+      // 1. Start protocol flow
       this.emit(response, EventType.RUN_STARTED, { threadId: input.threadId, runId: input.runId })
       this.emit(response, EventType.TEXT_MESSAGE_START, { messageId, role: "assistant" })
 
-      // Execute agent
+      // 2. Execute agent
       const agentResponse = await this.executeAgent(input, response, messageId)
       
-      // Send response
+      // 3. Send response
       this.emit(response, EventType.TEXT_MESSAGE_CONTENT, { 
         messageId, 
         delta: agentResponse || "I couldn't generate a response." 
       })
 
-      // Complete protocol flow
+      // 4. Complete protocol flow
       this.emit(response, EventType.TEXT_MESSAGE_END, { messageId })
       this.emit(response, EventType.RUN_FINISHED, { threadId: input.threadId, runId: input.runId })
 
