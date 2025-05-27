@@ -106,8 +106,8 @@ graph TB
 
 1. **Clone and install dependencies:**
 ```bash
-git clone <repository-url>
-cd ag-ui-meetup
+git clone https://github.com/domainio/AI-Agents-Gen-UI.git
+cd AI-Agents-Gen-UI
 npm install
 ```
 
