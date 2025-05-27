@@ -27,10 +27,10 @@ async function getStockPrice(symbol: string): Promise<number> {
 export default getStockPrice;
 
 
-import { DynamicTool } from "@langchain/core/tools";
+// import { DynamicTool } from "@langchain/core/tools";
 
-export const stockPriceTool = new DynamicTool({
-    name: "get_stock_price",
-    description: "Get the current stock price for a given company symbol using Yahoo Finance API.",
-    func: getStockPrice,
-});
+// export const stockPriceTool = new DynamicTool({
+//     name: "get_stock_price",
+//     description: "Get the current stock price for a given company symbol using Yahoo Finance API.",
+//     func: getStockPrice,
+// });

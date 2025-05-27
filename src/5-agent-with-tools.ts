@@ -5,7 +5,7 @@ import { BufferMemory } from "langchain/memory";
 import chalk from "chalk";
 import { weatherTool } from "./tools/get-weather";
 import { stockPriceTool } from "./tools/get-stock-price";
-import calculatorTool from "./tools/calculator";
+import { calculatorTool } from "./tools/calculator";
 import { createInterface } from "readline/promises";
 import agentPrompt from "./prompts/agent-prompt";
 

@@ -1,6 +1,6 @@
 import { DynamicTool } from "@langchain/core/tools";
 
-const calculatorTool = new DynamicTool({
+export const calculatorTool = new DynamicTool({
     name: "calculator",
     description: "Useful for performing mathematical calculations. Input should be a mathematical expression.",
     func: async (input: string): Promise<string> => {
@@ -13,5 +13,3 @@ const calculatorTool = new DynamicTool({
         }
     },
 });
-
-export default calculatorTool;

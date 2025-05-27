@@ -4,7 +4,7 @@ import { BufferMemory } from "langchain/memory"
 import dotenv from "dotenv"
 import { weatherTool } from "../../tools/get-weather.js"
 import { stockPriceTool } from "../../tools/get-stock-price.js"
-import calculatorTool from "../../tools/calculator.js"
+import { calculatorTool } from "../../tools/calculator.js"
 import agentPrompt from "../../prompts/agent-prompt.js"
 
 dotenv.config()

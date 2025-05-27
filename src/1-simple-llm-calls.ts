@@ -18,14 +18,14 @@ const response1 = await client.chat.completions.create({
 
 console.log("Response 1: ", chalk.green(response1.choices[0].message.content)); 
 
-const response2 = await client.chat.completions.create({
-    model: "gpt-4.1",
-    messages: [
-        {
-            role: "user",
-            content: "What is my name?"
-        }
-    ]
-});
+// const response2 = await client.chat.completions.create({
+//     model: "gpt-4.1",
+//     messages: [
+//         {
+//             role: "user",
+//             content: "What is my name?"
+//         }
+//     ]
+// });
 
-console.log("Response 2: ", chalk.red(response2.choices[0].message.content)); 
+// console.log("Response 2: ", chalk.red(response2.choices[0].message.content)); 
