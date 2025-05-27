@@ -178,11 +178,13 @@ This starts the AG-UI backend server on `http://localhost:8000`
 
 #### Frontend Setup
 ```bash
-# Install frontend dependencies and start dev server
+# Install frontend dependencies
+npm run agui:install
+
+# Start the development server
 npm run agui:frontend
 ```
 
-This starts the React frontend on `http://localhost:3001`
 
 #### What the AG-UI Implementation Shows:
 
