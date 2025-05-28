@@ -6,93 +6,6 @@ A comprehensive demonstration of AI agent development progression, from simple L
 
 This repository showcases the evolution of AI agent development through 6 progressive examples, culminating in a complete implementation of the **AG-UI (Agent-User Interaction Protocol)** - an open, lightweight, event-based protocol that standardizes how AI agents connect to frontend applications.
 
-## 📚 What is AG-UI Protocol?
-
-**AG-UI** is a revolutionary protocol that bridges the gap between backend AI agents and frontend applications. Unlike traditional AI agents that work in isolation, AG-UI enables real-time, interactive collaboration between humans and AI agents.
-
-### Key Features:
-- 🔄 **Real-time streaming** of agent thoughts and actions
-- 🛠️ **Tool orchestration** with live progress updates
-- 📊 **State synchronization** between agent and UI
-- 🤝 **Human-in-the-loop** collaboration
-- 🔌 **Framework agnostic** - works with any agent backend
-- 📡 **Event-driven** architecture using Server-Sent Events (SSE)
-
-### AG-UI Event Flow Diagram
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant Frontend
-    participant Backend
-    participant Agent
-    participant Tools
-
-    User->>Frontend: Send message
-    Frontend->>Backend: POST /awp (RunAgentInput)
-    Backend->>Frontend: RUN_STARTED event
-    Backend->>Frontend: TEXT_MESSAGE_START event
-    
-    Backend->>Agent: Execute with input
-    Agent->>Tools: Call tool (if needed)
-    Backend->>Frontend: TOOL_CALL_START event
-    Backend->>Frontend: TOOL_CALL_ARGS event
-    Tools-->>Agent: Tool result
-    Backend->>Frontend: TOOL_CALL_END event
-    
-    Agent-->>Backend: Generate response
-    Backend->>Frontend: TEXT_MESSAGE_CONTENT event
-    Backend->>Frontend: TEXT_MESSAGE_END event
-    Backend->>Frontend: RUN_FINISHED event
-    
-    Frontend->>User: Display complete response
-```
-
-### AG-UI Architecture Diagram
-
-```mermaid
-graph TB
-    subgraph "Frontend (React + TypeScript)"
-        A[Chat Component]
-        B[useAGUI Hook]
-        C[LoadingIndicator]
-        D[WelcomeMessage]
-        E[ToolCallIndicator]
-    end
-    
-    subgraph "AG-UI Protocol Layer"
-        F[Server-Sent Events]
-        G[Event Types]
-        H[JSON Encoding]
-    end
-    
-    subgraph "Backend (Node.js + Express)"
-        I[Backend Router]
-        J[AGUIService]
-        K[ToolEventHandler]
-        L[Agent Executor]
-    end
-    
-    subgraph "AI Agent Layer"
-        M[LangChain Agent]
-        N[OpenAI GPT-4]
-        O[Tools]
-    end
-    
-    A --> B
-    B --> F
-    F --> I
-    I --> J
-    J --> K
-    J --> L
-    L --> M
-    M --> N
-    M --> O
-    
-    style F fill:#e1f5fe
-    style G fill:#e1f5fe
-    style H fill:#e1f5fe
-```
 
 ## 🚀 Getting Started
 
@@ -194,7 +107,95 @@ npm run agui:frontend
 4. **Modern UI/UX:** Beautiful, responsive chat interface
 5. **Protocol Compliance:** Full AG-UI event specification implementation
 
-## 🔧 AG-UI Protocol Deep Dive
+
+## 📚 What is AG-UI Protocol?
+
+**AG-UI** is a revolutionary protocol that bridges the gap between backend AI agents and frontend applications. Unlike traditional AI agents that work in isolation, AG-UI enables real-time, interactive collaboration between humans and AI agents.
+
+### Key Features:
+- 🔄 **Real-time streaming** of agent thoughts and actions
+- 🛠️ **Tool orchestration** with live progress updates
+- 📊 **State synchronization** between agent and UI
+- 🤝 **Human-in-the-loop** collaboration
+- 🔌 **Framework agnostic** - works with any agent backend
+- 📡 **Event-driven** architecture using Server-Sent Events (SSE)
+
+### AG-UI Event Flow Diagram
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Agent
+    participant Tools
+
+    User->>Frontend: Send message
+    Frontend->>Backend: POST /awp (RunAgentInput)
+    Backend->>Frontend: RUN_STARTED event
+    Backend->>Frontend: TEXT_MESSAGE_START event
+    
+    Backend->>Agent: Execute with input
+    Agent->>Tools: Call tool (if needed)
+    Backend->>Frontend: TOOL_CALL_START event
+    Backend->>Frontend: TOOL_CALL_ARGS event
+    Tools-->>Agent: Tool result
+    Backend->>Frontend: TOOL_CALL_END event
+    
+    Agent-->>Backend: Generate response
+    Backend->>Frontend: TEXT_MESSAGE_CONTENT event
+    Backend->>Frontend: TEXT_MESSAGE_END event
+    Backend->>Frontend: RUN_FINISHED event
+    
+    Frontend->>User: Display complete response
+```
+
+### AG-UI Architecture Diagram
+
+```mermaid
+graph TB
+    subgraph "Frontend (React + TypeScript)"
+        A[Chat Component]
+        B[useAGUI Hook]
+        C[LoadingIndicator]
+        D[WelcomeMessage]
+        E[ToolCallIndicator]
+    end
+    
+    subgraph "AG-UI Protocol Layer"
+        F[Server-Sent Events]
+        G[Event Types]
+        H[JSON Encoding]
+    end
+    
+    subgraph "Backend (Node.js + Express)"
+        I[Backend Router]
+        J[AGUIService]
+        K[ToolEventHandler]
+        L[Agent Executor]
+    end
+    
+    subgraph "AI Agent Layer"
+        M[LangChain Agent]
+        N[OpenAI GPT-4]
+        O[Tools]
+    end
+    
+    A --> B
+    B --> F
+    F --> I
+    I --> J
+    J --> K
+    J --> L
+    L --> M
+    M --> N
+    M --> O
+    
+    style F fill:#e1f5fe
+    style G fill:#e1f5fe
+    style H fill:#e1f5fe
+```
+
 
 ### How AG-UI Works in This Project
 
